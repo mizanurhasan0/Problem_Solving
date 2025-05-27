@@ -18,26 +18,20 @@ const convertToMilligrams = (data) => {
         data.grams * unitHierarchy.gram +
         data.milligrams * unitHierarchy.milligram;
 };
-
 /**
- * Converts a total weight in milligrams to an object representing weight in tons,  
+ * Converts a total weight in milligrams to an object representing weight in tons,      
  * kilograms, grams, and milligrams.
- * @param {number} totalMg - The total weight in milligrams.
- *  @returns {Object} - An object with properties tons, kilograms, grams, and milligrams.
+ * @param {number} mg - The total weight in milligrams.
+ * @returns {Object} - An object with properties tons, kilograms, grams, and milligrams.
  * */
-function convertFromMilligrams(totalMg) {
-    const result = {};
-    result.tons = Math.floor(totalMg / unitHierarchy.ton);
-    totalMg %= unitHierarchy.ton;
-
-    result.kilograms = Math.floor(totalMg / unitHierarchy.kilogram);
-    totalMg %= unitHierarchy.kilogram;
-
-    result.grams = Math.floor(totalMg / unitHierarchy.gram);
-    totalMg %= unitHierarchy.gram;
-
-    result.milligrams = totalMg;
-    return result;
+function convertFromMilligrams(mg) {
+    const units = Object.keys(unitHierarchy);
+    return units.reduce((res, unit) => {
+        const value = Math.floor(mg / unitHierarchy[unit]);
+        res[unit + 's'] = value;
+        mg %= unitHierarchy[unit];
+        return res;
+    }, {});
 }
 
 /**
@@ -46,7 +40,6 @@ function convertFromMilligrams(totalMg) {
  * @param {Object} change - The change in stock represented in tons, kilograms, grams, and milligrams.
  * @param {string} operation - The operation to perform, either "sell" or "purchase".
  * */
-
 function updateStock(current, change, operation) {
     const currentMg = convertToMilligrams(current);
     const changeMg = convertToMilligrams(change);
@@ -73,5 +66,13 @@ let after_sale = updateStock(
     { tons: 0, kilograms: 0, grams: 1, milligrams: 0 },
     "sell"
 );
+
+// this will increase the stock by 1 gram.
+let after_purchase = updateStock(
+    initial_stock,
+    { tons: 0, kilograms: 0, grams: 2, milligrams: 0 },
+    "purchase"
+);
 // output the result
-console.log("#Result:", after_sale);
+// console.log("#Result:", after_sale);
+console.log("#Result:", after_purchase);

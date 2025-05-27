@@ -1,6 +1,9 @@
 
 import mongoose from 'mongoose';
 
+/* * Connect to MongoDB using Mongoose
+ * @returns {Promise<mongoose.Connection>} The connection object
+ */
 export default async function connectToDatabase() {
 
     try {

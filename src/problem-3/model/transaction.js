@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
+// Define the schema for a transaction
 const transactionSchema = new Schema({
     trxId: { type: String, required: true },
     amount: { type: Number, required: true },
