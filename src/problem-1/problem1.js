@@ -1,3 +1,5 @@
+// Node Version: v22.12.0
+// yarn version: 4.4.0
 // Problem: Mojo Simulation
 /*
 @input: An integer representing the initial number of mojos.

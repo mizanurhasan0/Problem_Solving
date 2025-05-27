@@ -1,7 +1,7 @@
 import { getNextFifoTransaction, updateTransactionStatus } from "../service/transaction.service.js";
 
 // timeout delays in seconds for each attempt
-const attemptDelays = [2, 5, 7, 8, 9];
+const attemptDelays = [120, 300, 600, 1200, 1800, 3600];
 
 /**
  * Validates transactions by checking if the trxId matches a randomly generated number.

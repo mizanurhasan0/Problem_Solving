@@ -61,11 +61,11 @@ let initial_stock = { tons: 1, kilograms: 2, grams: 0, milligrams: 0 };
 
 /* This will reduce the stock by 1 gram.
  */
-let after_sale = updateStock(
-    initial_stock,
-    { tons: 0, kilograms: 0, grams: 1, milligrams: 0 },
-    "sell"
-);
+// let after_sale = updateStock(
+//     initial_stock,
+//     { tons: 0, kilograms: 0, grams: 1, milligrams: 0 },
+//     "sell"
+// );
 
 // this will increase the stock by 1 gram.
 let after_purchase = updateStock(

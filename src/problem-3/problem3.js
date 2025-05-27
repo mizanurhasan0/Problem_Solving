@@ -9,7 +9,7 @@ import validateTransaction from './validate/validate_transaction.js';
 const app = express();
 connectToDatabase().catch(err => { console.error("Database connection failed:", err); });
 
-setInterval(async () => {
+const intervalId = setInterval(async () => {
     await generateRandomTransaction();
 }, process.env.INTERVAL || 5000);
 
@@ -22,6 +22,12 @@ setInterval(async () => {
 validateTransaction();
 // Server setup
 const server = http.createServer(app);
+
 server.listen(process.env.PORT || 5000, () => {
+    process.on('SIGINT', () => {
+        console.log('Shutting down...');
+        clearInterval(intervalId);
+        process.exit();
+    });
     console.log("Server listening on port :", process.env.PORT || 5000);
 });
